@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: point-of-sale
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: point-of-sale
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/juliusoh/portfolio-helm-charts
+    path: point-of-sale
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: point-of-sale
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
