@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cadvisor
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: cadvisor
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/juliusoh/portfolio-argocd
+    path: cadvisor
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cadvisor
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=true
