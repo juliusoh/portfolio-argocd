@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus-operator
+  name: prometheus
   namespace: argocd
   labels:
-    app.kubernetes.io/name: prometheus-operator
+    app.kubernetes.io/name: prometheus
 spec:
   project: default
   source:
     repoURL: https://github.com/juliusoh/portfolio-argocd
-    path: prometheus-operator
+    path: prometheus
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
